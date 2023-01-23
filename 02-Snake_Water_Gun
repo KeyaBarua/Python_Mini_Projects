@@ -1,0 +1,42 @@
+import random
+characters = ['S', 'W', 'G']
+score_user = 0
+score_comp = 0
+def win(user, computer):
+  if (user.upper() == 'S' and computer.upper() == 'W') or (user.upper() == 'G' and computer.upper() == 'S') or (user.upper() == 'W' and computer.upper() == 'G'):
+    return 1
+  elif (computer.upper() == 'S' and user.upper() == 'W') or (computer.upper() == 'G' and user.upper() == 'S') or (computer.upper() == 'W' and user.upper() == 'G'):
+    return -1
+  else:
+    return 0
+
+turns = int(input("How many turns do you want to play?"))
+i = 0
+
+while(i < turns):
+  user_input = input("Your Turn:")
+  comp_input = random.randint(0, 2)
+  print("Computer's Turn:", characters[comp_input])
+  if user_input.upper() == 'S' or user_input.upper() == 'W' or user_input.upper() == 'G':
+    winner = win(user_input, characters[comp_input])
+    if winner == 1:
+      print("You win!\n")
+      score_user += 1
+    elif winner == -1:
+      print("Computer wins!\n")
+      score_comp += 1 
+    else:
+      print("It's a draw.\n")
+  else:
+    print("Invalid input\n")
+  i += 1
+
+print("Your Score:", score_user)
+print("Computer's Score:", score_comp)
+if score_user > score_comp:
+  print("Congratulations! You win")
+elif score_user < score_comp:
+  print("Oops! Computer Wins")
+else:
+  print("It's a draw.")
+  
