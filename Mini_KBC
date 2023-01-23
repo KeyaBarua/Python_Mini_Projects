@@ -1,0 +1,149 @@
+# Question List
+questions = ["When is the World Health Day observed?",
+            "Pongal is a popular festival of which state?",
+            "Which Operating System was developed by Apple Inc.?",
+            "Taimur is the name of the son of which popular Bollywood couple?",
+            "In which of these sports can a team get ‘all out’?",
+            "In his retirement speech at Wankhede, who said, \"My life between 22 yards for 24 years, it is hard to believe that this wonderful journey is coming to an end\"?",
+            "In 2022, which city is slated to be the only one in the world to have hosted the summer and winter Olympics?",
+            "In which of these sports can players be revived after they have been declared 'dead' or 'out'?",
+            "Which type of memory is permanent?",
+            "What type of rain occurs when the raindrops freeze while falling?",
+            "In August 2022, Germany started hi-tech trains based on what?",
+            "Which country will host the 2023 ICC One Day Cricket World Cup?",
+            "What is the potential energy of an object on the ground?",
+            "Which is India's first Colour film?",
+            "Name a movie where Shahrukh Khan was the villain.",
+            "Which of the following musical instruments is of Indian origin?",
+            "Brass gets discoloured in air because of the presence of which of the following gases in air?",
+            "Which of the following is used in pencils?",
+            "Which of the following metals forms an amalgam with other metals?",
+            "What is part of a database that holds only one type of information?"]
+
+# Answers List
+answers = [["April 7", "March 6", "May 15", "April 28"], ["Karnatak", "TamilNadu", "Kerala", "Andhra Pradesh"], ["Windows", "Symbian", "IOS", "Android"], ["Deepika-Ranveer", "Shahrukh-Gauri", "Kareena-Saif", "Ranbir-Alia"], ["Volleyball", "Hockey", "Kabaddi", "Polo"], ["Anil Kumble", "Sachin Tendulkar", "Rahul Dravid", "Gautam Gambhir"], ["Athens", "Beijing", "Antwerp", "London"], ["Kabaddi", "Gilli Danda", "Wrestling", "Kho-Kho"], ["RAM", "ROM", "BIOS", "CACHE"], ["Sleet", "Snowfall", "Snowstorm", "Drizzle"], ["Solar System", "Hydrogen", "Nuclear Power", "Wind Power"], ["Australia", "England", "Pakistan", "India"], ["Kinetic energy", "Chemical energy", "Nuclear energy",  "Gravitational energy"], ["Kisan Kanya", "Mother India", "Taj Mahal", "Alam Ara"], ["Darr", "Chennai Express", "Bazigar", "Deewana"], ["Flute", "Sitar", "Violin", "Tabla"], ["Oxygen", "Hydrogen sulphide", "Carbon dioxide", "Nitrogen"], ["Graphite", "Silicon", "Charcoal", "Phosphorous"], ["Tin", "Lead", "Zinc", "Mercury"], ["Report", "Record", "Field", "File"]]
+
+# Correct answers
+correct_answers = [1, 2, 3, 3, 3, 2, 2, 1, 2, 1, 2, 4, 4, 1, 1, 1, 2, 1, 4, 3]
+
+# Price Money
+price = [1000, 2000, 3000, 5000, 10000, 20000, 40000, 80000, 160000, 320000, 640000, 1250000, 2500000, 5000000, 10000000]
+
+game_on = 1
+# sum = 0
+# index = 0
+reply = 'Y'
+temp = -1
+
+import random
+
+"""
+Function to print the money into words.
+"""
+def price_money(price):
+  if price == 1000:
+    return "One Thousand"
+  elif price == 2000:
+    return "Two Thousand"
+  elif price == 3000:
+    return "Three Thousand"
+  elif price == 5000:
+    return "Five Thousand"
+  elif price == 10000:
+    return "Ten Thousand"
+  elif price == 20000:
+    return "Twenty Thousand"
+  elif price == 40000:
+    return "Forty Thousand"
+  elif price == 80000:
+    return "Eighty Thousand"
+  elif price == 160000:
+    return "One Lakh Sixty Thousand"
+  elif price == 320000:
+    return "Three Lakhs Twenty Thousand"
+  elif price == 640000:
+    return "Six Lakhs Forty Thousand"
+  elif price == 1250000:
+    return "Twelve Lakhs Fifty Thousand"
+  elif price == 2500000:
+    return "Twenty Five Lakhs"
+  elif price == 5000000:
+    return "Fifty Lakhs"
+  elif price == 10000000:
+    return "One Crore"
+  else:
+    return "Zero"
+
+"""
+Function of the main game
+"""
+def game():
+  global index
+  global sum
+  num = random.randint(0, 14)
+
+  print(questions[num] + "\n")
+
+  # To get the multiple choices
+  for i in range(len(answers[num])):
+    print(str(i + 1) + ". " + answers[num][i]) 
+      
+  answer = int(input("Enter your answer:>>"))
+  if answer == correct_answers[num]:
+    sum = price[index]
+    index = index + 1
+    print("Congratulations! You have got price money of " +     str(price_money(sum)) + " Rupees.\n")
+    if sum == 10000000:
+      return 0
+    else:
+      return 1
+  else:
+    print("Sorry! You got the incorrect answer.\n")
+    return 0
+
+"""
+Function to display the message after game is over.
+"""
+def after_game():
+    print("GAME OVER! You take home", price_money(sum), "Rupees")
+    
+# <----------------Start-------------------->
+name = input("Please enter your name>>")
+print("Welcome to KBC,", name.title())
+index = 0
+reply = 'Y'
+start = input("Do you want to Start the game? Press 'Y' for Yes and 'N' for No.>>")
+print('\n')
+
+
+
+while game_on == 1:
+  
+  if start.upper() == 'Y':
+    while reply.upper() == 'Y':
+      game_on = game()
+      if game_on == 1:
+        reply = input("Do you want to continue or quit? Press 'Y' to    continue and 'N' to quit>>")
+        print('\n')
+      else:
+        break
+    else:
+      if reply.upper() == 'N':
+        after_game()
+        break
+      else:
+        print("Invalid Input. Try Again\n")
+        reply = input("Do you want to continue or quit? Press 'Y' to   continue and 'N' to quit>>")
+
+    if game_on == 0: # If incorrect answer
+      after_game()
+
+  # If user types N
+  elif start.upper() == 'N' or reply.upper() == 'N':
+    after_game()
+    break
+    
+  else:
+    print("Invalid Input. Try Again\n")
+    start = input("Do you want to Start the game? Press 'Y' for Yes and 'N' for No.>>")
+    print('\n')
